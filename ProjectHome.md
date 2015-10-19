@@ -1,0 +1,7 @@
+Browser shoutcast streams and play them.  Uses a three column layout to maximize information density and navigation speed.  Station controls are minimal.  You start playing one thing, then switch to another thing if you want it.  Its just an indexed radio stream, thats it.
+
+ListViews ended up being very limiting on the original UI goals.  {get/set}Selection didnt work, I never found any way to access the list items as children, in the end I had to give up and let the auto wired left/right/up/down-focus handlers do their thing, much to my chagrin.  Honestly DIY'ing the ListView as dynamically built text boxes would have probably been better/faster.
+
+That said there is an enormous amount of room for improvement, even if you accept ListView limitations.  A lot of these things are algorithmic; places where Castor rebuilds arrays too many times.  I couldnt find any way to get the ListAdapter using spliced data, but a well placed CopyTo could do good things.  Also when you page around you really only need one new ListView for whatevers being loaded, currently all get redrawn (this is the Commander Keen / optimization).  Interface is blocking in a bunch of placed, async load of items onto screen would be good but that'd be frustrating to feed through SAX, but mainly its just how the interface freezes.  Even spinner/whiteouts might help.
+
+Otoh filters and favorites would go far further: you wouldnt have to browse 381 genres, only a few stations.  And they'd be cached.
